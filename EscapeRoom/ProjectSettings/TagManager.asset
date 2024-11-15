@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - canPickUp
+  - Painting
+  - WidePainting
+  - Tall
+  - Small
+  - Wide
   layers:
   - Default
   - TransparentFX
