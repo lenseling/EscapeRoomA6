@@ -10,81 +10,118 @@ public class RingController : MonoBehaviour
     public GameObject lightSphere; // Reference to the light sphere
     public float correctAngle; // Target angle for the inner ring
     private float angleTolerance = 10f; // Tolerance for matching angles
-    private bool solved = false;
+
+    public Transform rightHandAnchor; // VR Right Hand anchor
+    public Transform leftHandAnchor;  // VR Left Hand anchor
+    private Transform activeHand;     // Active hand performing the interaction
+
+    private Material originalMaterial; // To store the ring's original material
+    public Material highlightMaterial; // Material used to highlight the ring
+
+    void Start()
+    {
+        // Save the original material of the ring
+        if (ring != null)
+        {
+            originalMaterial = ring.GetComponent<Renderer>().material;
+        }
+    }
 
     void Update()
     {
-        // Check for mouse click
-        if (Input.GetMouseButtonDown(0)) // Left-click
+        // Detect active hand (which hand is being used)
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            activeHand = rightHandAnchor;
+        }
+        else if (OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.LTouch))
+        {
+            activeHand = leftHandAnchor;
+        }
+
+        // If an active hand is detected, perform raycast to highlight the ring
+        if (activeHand != null)
+        {
+            Ray ray = new Ray(activeHand.position, activeHand.forward);
             RaycastHit hit;
 
-            // Perform a raycast to check if the ring was clicked
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit, 100f)) // Perform raycast to detect the ring
             {
-                if (hit.transform == transform) // Check if this ring (inner ring) was clicked
+                if (hit.transform == transform) // If the ray hits the ring
                 {
-                    isSelected = true;
+                    if (!isSelected) // Only highlight if not already selected
+                    {
+                        HighlightRing(); // Highlight the ring
+                    }
+
+                    // Keep the ring selected if the index trigger is pressed
+                    isSelected = OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch) ||
+                                 OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch);
                 }
-                else
+                else // If ray hits somewhere else, unhighlight
                 {
-                    isSelected = false; // Deselect if clicking elsewhere
+                    if (isSelected)
+                    {
+                        UnhighlightRing(); // Remove highlight if not selected anymore
+                    }
+                    isSelected = false; // Deselect
                 }
+            }
+            else // If ray doesn't hit anything, unhighlight
+            {
+                //if (isSelected)
+                //{
+                    UnhighlightRing(); // Remove highlight if ray misses
+                //}
+                isSelected = false; // Deselect
             }
         }
 
-        // Rotate the inner and outer rings if the inner ring is selected
-        if (isSelected && Input.GetMouseButton(0))
+        // Rotate if selected
+        if (isSelected && (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch) ||
+                           OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch)))
         {
             float rotationAmount = rotationSpeed * Time.deltaTime * 2;
-
-            // Rotate the inner ring
             transform.Rotate(Vector3.up, rotationAmount);
-
-            // Rotate the outer ring
-            if (ring != null)
-            {
-                ring.transform.Rotate(Vector3.up, rotationAmount);
-            }
         }
 
-        // Deselect when the mouse button is released
-        if (Input.GetMouseButtonUp(0))
-        {
-            isSelected = false;
-        }
-
-        // Check if both rings are at the correct angles
+        // Check alignment with the correct angle
         CheckRingAngles();
     }
 
     private void CheckRingAngles()
     {
-        // Get current angles
-        float ringAngle = Mathf.Abs(transform.eulerAngles.x);  // Check X-axis rotation of the inner ring
+        float ringAngle = Mathf.Abs(transform.eulerAngles.x);
 
-        // Check if the angle is within the tolerance range
         if (Mathf.Abs(ringAngle - correctAngle) <= angleTolerance)
         {
-            // Turn the light green if aligned
             if (lightSphere != null)
             {
                 lightSphere.GetComponent<Renderer>().material.color = Color.green;
-                Debug.Log("Ring aligned. Light turned green.");
             }
         }
         else
         {
-            // Reset the light color (optional)
             if (lightSphere != null)
             {
                 lightSphere.GetComponent<Renderer>().material.color = Color.red;
-                Debug.Log("Ring not aligned. Light turned red.");
             }
         }
-
-        
     }
 
+    private void HighlightRing()
+    {
+        if (ring != null && highlightMaterial != null)
+        {
+            ring.GetComponent<Renderer>().material = highlightMaterial;
+        }
+    }
+
+    private void UnhighlightRing()
+    {
+        if (ring != null && originalMaterial != null)
+        {
+            ring.GetComponent<Renderer>().material = originalMaterial;
+        }
+    }
 }

@@ -4368,7 +4368,7 @@ GameObject:
   - component: {fileID: 229078232}
   - component: {fileID: 229078233}
   m_Layer: 0
-  m_Name: Music Box
+  m_Name: MusicBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4411,10 +4411,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.0323601
-  m_Height: 2.0647202
+  m_Radius: 1.3100991
+  m_Height: 2.6201982
   m_Direction: 1
-  m_Center: {x: 0.5323601, y: 0, z: 0}
+  m_Center: {x: 0.8100991, y: 0, z: 0}
 --- !u!114 &229078233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6435,7 +6435,7 @@ GameObject:
   - component: {fileID: 299996210}
   - component: {fileID: 299996209}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Lockbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20257,6 +20257,9 @@ MonoBehaviour:
   lock2: {fileID: 1023876775}
   lock3: {fileID: 842163356}
   unlockSound: {fileID: 8300000, guid: 61ff536c2badd20428b07e02fcb64d73, type: 3}
+  musicBoxAudio: {fileID: 8300000, guid: d424a19f163d7a544831cbd53dda786b, type: 3}
+  musicBoxCompleted: 0
+  musicBox: {fileID: 229078230}
 --- !u!4 &850844968
 Transform:
   m_ObjectHideFlags: 0
@@ -35555,7 +35558,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1453311592774380472, guid: f101a2b4504c3d04a95511ba8b3543e3, type: 3}
       propertyPath: m_Name
-      value: Lock
+      value: Lock1
       objectReference: {fileID: 0}
     - target: {fileID: 2261057276556505346, guid: f101a2b4504c3d04a95511ba8b3543e3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -46328,7 +46331,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1453311592774380472, guid: f101a2b4504c3d04a95511ba8b3543e3, type: 3}
       propertyPath: m_Name
-      value: Lock (1)
+      value: Lock2
       objectReference: {fileID: 0}
     - target: {fileID: 2261057276556505346, guid: f101a2b4504c3d04a95511ba8b3543e3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -48866,7 +48869,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1453311592774380472, guid: f101a2b4504c3d04a95511ba8b3543e3, type: 3}
       propertyPath: m_Name
-      value: Lock (2)
+      value: Lock3
       objectReference: {fileID: 0}
     - target: {fileID: 2261057276556505346, guid: f101a2b4504c3d04a95511ba8b3543e3, type: 3}
       propertyPath: m_LocalPosition.x
