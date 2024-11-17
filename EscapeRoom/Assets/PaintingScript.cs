@@ -5,6 +5,7 @@ public class PaintingFrame : MonoBehaviour
     [Header("Frame Settings")]
     public string requiredPaintingTag; // The tag of the painting this frame accepts
     public Transform fixedPosition;   // Position to fix the painting in place
+    public GameObject fixedPainting;
 
     void OnTriggerEnter(Collider other)
     {
@@ -15,9 +16,12 @@ public class PaintingFrame : MonoBehaviour
 
             // Optionally, disable or destroy the painting after placement
             //Destroy(other.gameObject); // OR set it inactive: other.gameObject.SetActive(false);
-            //other.gameObject.SetActive(false);
-            FixPainting(other.transform);
+            //FixPainting(other.transform);
             GetComponent<Collider>().isTrigger = false;
+            other.gameObject.SetActive(false);
+            fixedPainting.SetActive(true);
+            GameManager.Instance.fixPainting();
+
         }
         else
         {
@@ -45,7 +49,7 @@ public class PaintingFrame : MonoBehaviour
         paintingTransform.gameObject.SetActive(false);
 
         paintingTransform.position = cubeTransform.position;
-        //transform.rotation = cubeTransform.rotation;
+        transform.rotation = cubeTransform.rotation;
         Quaternion targetRotation = cubeTransform.rotation;
         paintingTransform.rotation = Quaternion.Euler(targetRotation.eulerAngles.x, targetRotation.eulerAngles.y, transform.rotation.eulerAngles.z);
         paintingTransform.gameObject.SetActive(true);
