@@ -14,7 +14,10 @@ public class PaintingFrame : MonoBehaviour
             Debug.Log($"Correct painting '{other.name}' placed in frame '{gameObject.name}'!");
 
             // Optionally, disable or destroy the painting after placement
-            Destroy(other.gameObject); // OR set it inactive: other.gameObject.SetActive(false);
+            //Destroy(other.gameObject); // OR set it inactive: other.gameObject.SetActive(false);
+            //other.gameObject.SetActive(false);
+            FixPainting(other.transform);
+            GetComponent<Collider>().isTrigger = false;
         }
         else
         {
@@ -22,11 +25,31 @@ public class PaintingFrame : MonoBehaviour
         }
     }
 
-    private void FixPainting(Transform painting)
+    private void FixPainting(Transform paintingTransform)
     {
-        // Position and rotate the painting to match the frame's fixed position
-        //painting.position = fixedPosition.position;
-        //painting.rotation = fixedPosition.rotation;
-        //painting.localScale = fixedPosition.localScale; // Match scale if needed
+        Debug.Log(paintingTransform.gameObject.name);
+        Transform cubeTransform = null;
+
+        // Check if the parent exists and try to find "Cube (1)" under it
+        if (transform.parent != null)
+        {
+            cubeTransform = transform.parent.Find("Cube (1)");
+        }
+
+        // If not found under the parent or no parent exists, search under the current object
+        if (cubeTransform == null)
+        {
+            cubeTransform = transform.Find("Cube (1)");
+        }
+        cubeTransform.gameObject.SetActive(false);
+        paintingTransform.gameObject.SetActive(false);
+
+        paintingTransform.position = cubeTransform.position;
+        //transform.rotation = cubeTransform.rotation;
+        Quaternion targetRotation = cubeTransform.rotation;
+        paintingTransform.rotation = Quaternion.Euler(targetRotation.eulerAngles.x, targetRotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+        paintingTransform.gameObject.SetActive(true);
+        //gameObject.SetActive(true);//painting.localScale = fixedPosition.localScale; // Match scale if needed
+        Debug.Log("changed");
     }
 }
