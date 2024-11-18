@@ -8,12 +8,12 @@ The escape room map is an original design of a haunted manor. The details of the
 1. Match the paintings to the correct frame.
    - Use either hand’s side trigger to grab the paintings and move them to their corresponding frame
 2. Unlock the music box lock
-  - Move to the teleport point by the music box, close to the bed
-  - Use the side trigger to select which hand to track
-  - Point the back trigger at the two rings and rotate them so the lights both turn green
+   - Move to the teleport point by the music box, close to the bed
+   - Use the side trigger to select which hand to track
+   - Point the back trigger at the two rings and rotate them so the lights both turn green
 3. Use the ouija board to locate the final key
-  - Use the back trigger to select the board which activates the path to the key
-  - Use back trigger to select the key
+   - Use the back trigger to select the board which activates the path to the key
+   - Use back trigger to select the key
 
 ## Game Elements
 There is a 10 minute timer that leads to a fail state. Complete all 3 puzzles to win.
