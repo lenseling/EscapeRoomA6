@@ -1,5 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using CTools.CTimer;
+using TMPro;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -14,8 +17,12 @@ public class GameManager : MonoBehaviour
     public AudioClip musicBoxAudio;
     private AudioSource musicSource;
     public bool musicBoxCompleted = false;
+    
     public GameObject musicBox;
-
+    
+    public GameTimer gameTimer;
+    private bool gameEnded = false;
+    public float timeRemaining = 600f;
 
     void Awake()
     {
@@ -39,6 +46,7 @@ public class GameManager : MonoBehaviour
         {
             musicSource = gameObject.AddComponent<AudioSource>();
         }
+        
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -119,11 +127,32 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (musicBoxCompleted)
+        
+        if (!gameEnded)
         {
-            musicBoxCompleted = false;
-            musicBoxComplete();
+            if (musicBoxCompleted)
+            {
+                musicBoxCompleted = false;
+                musicBoxComplete();
+            }
+            if (lock1 != null && lock2 != null && lock3 != null && !lock1.activeSelf && !lock2.activeSelf && !lock3.activeSelf)
+            {
+                WinGame();
+            }
+            if (timeRemaining > 0)
+            {
+                timeRemaining -= Time.deltaTime; // Countdown by time
+                gameTimer.DisplayTime(timeRemaining);
+            }
+            else
+            {
+                gameEnded = true;
+                EndGame(); // Time's up!
+            }
         }
+
+        
+
     }
 
     private void AssignObjects()
@@ -143,5 +172,18 @@ public class GameManager : MonoBehaviour
                 Debug.LogWarning("One or more objects (locks or music box) are missing in the MainScene.");
             }
         //}
+    }
+
+    private void EndGame()
+    {
+
+        Debug.Log("Game over");
+        SceneManager.LoadScene("FailState");
+        
+        
+    }
+    private void WinGame()
+    {
+        SceneManager.LoadScene("Success");
     }
 }

@@ -11,6 +11,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EscapeRoom.unity
     guid: 8fcce78843ba15440aecf4d2afd79474
+  - enabled: 1
+    path: Assets/Scenes/Success.unity
+    guid: 2077e7e5f1a65eb48a1d9796e5d297bc
+  - enabled: 1
+    path: Assets/Scenes/FailState.unity
+    guid: e24929fad35adfb4fb5330dfbe28c7ba
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 8670dea6c9797c049b00ef88255c61d9, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 837f07a5d967be444a4dc2c94f634bea, type: 2}
