@@ -154,7 +154,10 @@ public class GameManager : MonoBehaviour
         {
             key.SetActive(false);
         }
-        path.SetActive(false);
+        if (path != null) {
+            path.SetActive(false);
+
+        }
 
     }
 
@@ -216,7 +219,11 @@ public class GameManager : MonoBehaviour
         {
             lock3.SetActive(false);
             key.SetActive(false);
-            path.SetActive(false);
+            if (path != null)
+            {
+                path.SetActive(false);
+
+            }
         }
 
         // Make sure they are not null
