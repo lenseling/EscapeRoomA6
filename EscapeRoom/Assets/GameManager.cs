@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     private AudioSource musicSource;
     public bool musicBoxCompleted = false;
     public GameObject key;
+    public GameObject path;
     
     public GameObject musicBox;
 
@@ -153,6 +154,8 @@ public class GameManager : MonoBehaviour
         {
             key.SetActive(false);
         }
+        path.SetActive(false);
+
     }
 
     private void Update()
@@ -197,7 +200,8 @@ public class GameManager : MonoBehaviour
         
 
         musicBox = GameObject.Find("MusicBox");
-            key = GameObject.Find("Key_Golden");
+        key = GameObject.Find("Key_Golden");
+        path = GameObject.Find("PathToTheKey");
 
         if (puzzle1complete)
         {
@@ -212,6 +216,7 @@ public class GameManager : MonoBehaviour
         {
             lock3.SetActive(false);
             key.SetActive(false);
+            path.SetActive(false);
         }
 
         // Make sure they are not null
