@@ -30,6 +30,26 @@ public class BoardInteractor : MonoBehaviour
                 {
                     //Debug.Log("HIT)");
                     path.SetActive(true);
+                    Transform childTransform = transform.Find("cursor1");
+                    if (childTransform != null)
+                    {
+                        // Get the script attached to the child
+                        Cursor script = childTransform.GetComponent<Cursor>();
+
+                        if (script != null)
+                        {
+                            // Call the function in the script
+                            script.moveCursor();
+                        }
+                        else
+                        {
+                            Debug.LogError("Script not found on cursor1!");
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogError("Child 'cursor1' not found!");
+                    }
                 } 
             }
         }

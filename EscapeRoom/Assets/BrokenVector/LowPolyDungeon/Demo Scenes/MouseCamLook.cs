@@ -10,7 +10,7 @@ public class MouseCamLook : MonoBehaviour
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()

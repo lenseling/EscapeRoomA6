@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class move : MonoBehaviour
+public class Cursor : MonoBehaviour
 {
     public GameObject letters;
     private Dictionary<char, Transform> letterTargets;
@@ -33,15 +33,15 @@ public class move : MonoBehaviour
     {
         if (!reached)
             transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-        
-        if (Input.GetKeyDown("space"))
-        {
-            reached = false;
-            curl = curl == 'A' ? 'M' : 'A';
-            target = letterTargets[curl];
-        }
 
         if (!reached && Vector3.Distance(transform.position, target.position) < 0.01f)
             reached = true;
+    }
+
+    public void moveCursor()
+    {
+        reached = false;
+        curl = curl == 'A' ? 'D' : 'A';
+        target = letterTargets[curl];
     }
 }
