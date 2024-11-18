@@ -38,3 +38,4 @@ Sounds Used:
 Models
 - https://assetstore.unity.com/packages/3d/environments/interior-house-assets-urp-257122
 - https://assetstore.unity.com/packages/3d/environments/dungeons/ultimate-low-poly-dungeon-143535
+- https://sketchfab.com/3d-models/ouija-board-asset-f8d1bc6250de42e8ac61e4e8e6794b3c
