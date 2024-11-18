@@ -217,5 +217,15 @@ namespace CTools.CTimer
             OnIdChanged = null;
             OnBeforeTimerDisposed = null;
         }
+
+        public float GetRemainingTime()
+        {
+            if (IsKilled)
+                return 0;
+
+            float elapsed = (m_UseUnscaledTime ? Time.unscaledTime : Time.time) - m_StartTime - m_PausedTime;
+            float remaining = Mathf.Max(0, m_Duration - elapsed);
+            return remaining;
+        }
     }
 }
