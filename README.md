@@ -1,6 +1,8 @@
 # Escape the Haunted Manor!
 You’ve woken up in a house you don’t recognize that is filled with strange objects and a ghostly atmosphere. Escape the manor before you are cursed to spend eternity here!
 
+[Demo Video](https://youtu.be/yDvn3bT4JlU)
+
 ## Environment
 The escape room map is an original design of a haunted manor. The details of the map are designed to add to the game’s spooky theme and create an immersive atmosphere. The music box, paintings, picture frames, and music box lock puzzle models are original creations. A custom golden shader is applied to the key, adding a unique, visual element that draws attention to this item. Particle effects enhance the fireplaces and the key, adding life to the environment. A custom blue light flicker is applied to the lights to add a spooky effect to the light.
 
